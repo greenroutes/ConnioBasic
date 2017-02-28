@@ -984,16 +984,7 @@ $( document ).ready(function() {
 			return client.connected;
 		},
       },
-    connioMQTTMessageRecvCallback: function on_connio_property_updated(device_id,property, value) {
-  try {
-      // Block#: 46
-  if (property == ('temperature')) {
-    // Block#: 50
-    com.fc.JavaScriptDistLib.Label.setProperty("temperature", "Text", String(value) + String(' C'));// Block#: 54
-    com.fc.JavaScriptDistLib.Gauge.setProperty("Gauge", "Current Value", com.fc.JavaScriptDistLib.MathLibrary.toNumber(value)
-    );}
-
-  } catch (e) { com.fc.JavaScriptDistLib.handleException(e); }},
+    connioMQTTMessageRecvCallback: null,
     configure: function () {
 		if( this.connioBaseURL == null ) {
 			var parent = this;
@@ -1929,24 +1920,24 @@ $( document ).ready(function() {
 var locStation;
 
 
-// Block#: 57
+// Block#: 1
 function on_stationsButton_click( ) {
   try {
-      // Block#: 58
-  com.fc.JavaScriptDistLib.Connio.connioStartTrackingPropertyChanges(on_connio_property_updated);// Block#: 59
+      // Block#: 2
+  com.fc.JavaScriptDistLib.Connio.connioStartTrackingPropertyChanges(on_connio_property_updated);// Block#: 3
   com.fc.JavaScriptDistLib.Connio.connioGetDevices('_dpf_807651864374550548',
    function(devices){
-    // Block#: 61
+    // Block#: 5
     locStation = (com.fc.JavaScriptDistLib.Connio.connioGetDeviceLocation(devices, '_dev_807652890532634093'));
-    // Block#: 65
-    com.fc.JavaScriptDistLib.Label.setProperty("deviceName", "Text", com.fc.JavaScriptDistLib.Connio.connioGetDeviceName(devices, '_dev_807652890532634093'));// Block#: 69
+    // Block#: 9
+    com.fc.JavaScriptDistLib.Label.setProperty("deviceName", "Text", com.fc.JavaScriptDistLib.Connio.connioGetDeviceName(devices, '_dev_807652890532634093'));// Block#: 13
     com.fc.JavaScriptDistLib.Label.setProperty("deviceLocation", "Text", [(com.fc.JavaScriptDistLib.TextLib.convertToText(com.fc.JavaScriptDistLib.Location.locationGetLatitude(locStation))),', ',(com.fc.JavaScriptDistLib.TextLib.convertToText(com.fc.JavaScriptDistLib.Location.locationGetLongitude(locStation)))].join(''));
   });
-  // Block#: 78
+  // Block#: 22
   com.fc.JavaScriptDistLib.Connio.connioReadData('_dev_807652890532634093',
    function(data){
-    // Block#: 80
-    com.fc.JavaScriptDistLib.Label.setProperty("temperature", "Text", String(com.fc.JavaScriptDistLib.TextLib.convertToText(com.fc.JavaScriptDistLib.Connio.connionGetValue(data, 'mostRecent', 'temperature'))) + String(' C'));// Block#: 87
+    // Block#: 24
+    com.fc.JavaScriptDistLib.Label.setProperty("temperature", "Text", String(com.fc.JavaScriptDistLib.TextLib.convertToText(com.fc.JavaScriptDistLib.Connio.connionGetValue(data, 'mostRecent', 'temperature'))) + String(' C'));// Block#: 31
     com.fc.JavaScriptDistLib.Gauge.setProperty("Gauge", "Current Value", com.fc.JavaScriptDistLib.MathLibrary.toNumber(com.fc.JavaScriptDistLib.Connio.connionGetValue(data, 'mostRecent', 'temperature'))
     );
   },
@@ -1955,13 +1946,13 @@ function on_stationsButton_click( ) {
   });
   } catch (e) { com.fc.JavaScriptDistLib.handleException(e); }};
 $('[obj-name="stationsButton"]').on( 'click',  on_stationsButton_click );
-// Block#: 101
+// Block#: 36
 function on_connio_property_updated (device_id,property, value) {
   try {
-      // Block#: 102
+      // Block#: 37
   if (property == ('temperature')) {
-    // Block#: 106
-    com.fc.JavaScriptDistLib.Label.setProperty("temperature", "Text", String(value) + String(' C'));// Block#: 110
+    // Block#: 41
+    com.fc.JavaScriptDistLib.Label.setProperty("temperature", "Text", String(value) + String(' C'));// Block#: 45
     com.fc.JavaScriptDistLib.Gauge.setProperty("Gauge", "Current Value", com.fc.JavaScriptDistLib.MathLibrary.toNumber(value)
     );}
 
